@@ -1,13 +1,131 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+p {
+  color: rgb(102, 109, 113) !important;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1 {
+  color: rgb(62, 70, 91) !important;
+}
+
+.post-title-box {
+  text-align: center;
+}
+
+.preview-container {
+  background: #f4f4f4;
+  min-height: calc(100vh - 56px);
+  padding: 20px;
+}
+
+.preview {
+  padding: 75px 100px;
+  background: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 5px;
+  border: 1px solid rgb(224, 230, 237);
+}
+
+.post-title-box-span {
+  display: block;
+  height: 1px;
+  width: 150px;
+  background: rgb(156, 157, 163);
+  margin: 50px auto;
+}
+
+.header-panel {
+  display: flex;
+  width: 100%;
+  height: 150px;
+  background: #f4f4f4;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-nav-link {
+  padding: 0.5em 20px !important;
+  background: #f4f4f4;
+  border-radius: 7px;
+  color: #333;
+}
+
+.custom-nav-link:hover {
+  color: #333;
+  background: #eeeeee;
+}
+
+pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f6f8fa;
+  border-radius: 3px;
+}
+
+.dashboard-header {
+  display: flex;
+  width: 100%;
+  height: 150px;
+
+  background: #f4f4f4;
+  border-radius: 7px;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.posts-link {
+  color: #333;
+  margin-left: 10px;
+  text-decoration: none !important;
+}
+
+.user-post-item > .posts-link:hover {
+  background: #eeeeee !important;
+}
+
+.post-container {
+  background: #f4f4f4;
+  min-height: 100vh;
+  margin: 0px auto;
+  padding: 50px;
+}
+
+.post {
+  max-width: 890px;
+  margin: 0px auto;
+  border-image: initial;
+  padding: 75px 100px;
+  background: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 5px;
+  border: 1px solid rgb(224, 230, 237);
+}
+
+.title-box {
+  text-align: center;
+}
+.title-box > span {
+  display: block;
+  height: 1px;
+  width: 150px;
+  background: rgb(156, 157, 163);
+  margin: 50px auto;
+}
+
+.article-container {
+  margin: 0px 50px;
+}
+
+.article-container > p {
+  margin: 15px 0px;
+}
+
+.go-back-link {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.go-back-link:hover {
+  text-decoration: none;
 }

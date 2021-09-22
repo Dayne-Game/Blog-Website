@@ -28,25 +28,20 @@ export const listPosts =
     try {
       dispatch({ type: POST_LIST_REQUEST });
 
-      const { data } = await axios.get(
-        `/api/posts?keyword=${keyword}&pageNumber=${pageNumber}`
-      );
+      const { data } = await axios.get(`/api/posts?keyword=${keyword}&pageNumber=${pageNumber}`);
 
       dispatch({ type: POST_LIST_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
         type: POST_LIST_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
+        payload: error.response && error.response.data.message ? error.response.data.message : error.message,
       });
     }
   };
 
 export const userListPosts =
   (keyword = "", pageNumber = "") =>
-  async (dispatch) => {
+  async (dispatch, getState) => {
     try {
       dispatch({ type: USER_POST_LIST_REQUEST });
 
@@ -60,17 +55,11 @@ export const userListPosts =
         },
       };
 
-      const { data } = await axios.get(
-        `/api/posts/users?keyword=${keyword}&pageNumber=${pageNumber}`,
-        config
-      );
+      const { data } = await axios.get(`/api/posts/users?keyword=${keyword}&pageNumber=${pageNumber}`, config);
 
       dispatch({ type: USER_POST_LIST_SUCCESS, payload: data });
     } catch (error) {
-      const message =
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message;
+      const message = error.response && error.response.data.message ? error.response.data.message : error.message;
       if (message === "Not authorized, token failed") {
         dispatch(logout());
       }
@@ -94,10 +83,7 @@ export const postDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: POST_DETAILS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
 };
@@ -124,10 +110,7 @@ export const deletePost = (id) => async (dispatch, getState) => {
       type: POST_DELETE_SUCCESS,
     });
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
+    const message = error.response && error.response.data.message ? error.response.data.message : error.message;
     if (message === "Not authorized, token failed") {
       dispatch(logout());
     }
@@ -161,10 +144,7 @@ export const createPost = () => async (dispatch, getState) => {
       payload: data,
     });
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
+    const message = error.response && error.response.data.message ? error.response.data.message : error.message;
     if (message === "Not authorized, token failed") {
       dispatch(logout());
     }
@@ -200,10 +180,7 @@ export const updatePost = (post) => async (dispatch, getState) => {
     });
     dispatch({ type: POST_DETAILS_SUCCESS, payload: data });
   } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
+    const message = error.response && error.response.data.message ? error.response.data.message : error.message;
     if (message === "Not authorized, token failed") {
       dispatch(logout());
     }
