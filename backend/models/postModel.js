@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const blogSchema = mongoose.Schema(
+const postSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -28,6 +28,6 @@ const blogSchema = mongoose.Schema(
   }
 );
 
-const Blog = mongoose.model("Blog", blogSchema);
+const Post = mongoose.model("Post", postSchema);
 
-export default Blog;
+export default Post;
