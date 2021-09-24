@@ -25,6 +25,9 @@ const Header = () => {
               <LinkContainer to="/">
                 <Nav.Link>Home</Nav.Link>
               </LinkContainer>
+              <LinkContainer to="/posts">
+                <Nav.Link>Posts</Nav.Link>
+              </LinkContainer>
             </Nav>
             {userInfo ? (
               <Fragment>
@@ -32,8 +35,13 @@ const Header = () => {
                   <LinkContainer to="/dashboard">
                     <Nav.Link>Dashboard</Nav.Link>
                   </LinkContainer>
-                  <NavDropdown title={userInfo.name} id="collasible-nav-dropdown">
-                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                  <NavDropdown
+                    title={userInfo.name}
+                    id="collasible-nav-dropdown"
+                  >
+                    <NavDropdown.Item onClick={logoutHandler}>
+                      Logout
+                    </NavDropdown.Item>
                   </NavDropdown>
                 </Nav>
               </Fragment>

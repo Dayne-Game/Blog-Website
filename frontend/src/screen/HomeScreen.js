@@ -29,12 +29,16 @@ const HomeScreen = () => {
       ) : (
         <Row>
           <Col sm="8" className="mt-3">
-            <p>To start creating Posts you will need to Register! When you register you will have access to your Dashboard where you can create and edit your posts!</p>
+            <p>
+              To start creating Posts you will need to Register! When you
+              register you will have access to your Dashboard where you can
+              create and edit your posts!
+            </p>
           </Col>
           <Col sm="4" className="mt-3">
-            <h3>Get Reading!</h3>
+            <h3>Latest Posts</h3>
             <Nav vertical>
-              {posts.map((p) => (
+              {posts.slice(0, 5).map((p) => (
                 <PostItem post={p} />
               ))}
             </Nav>
