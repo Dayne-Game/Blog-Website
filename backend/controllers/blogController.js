@@ -26,7 +26,7 @@ const getPosts = asyncHandler(async (req, res) => {
 });
 
 // @DESC    FETCH USERS POSTS
-// @ROUTE   GET /api/posts/users
+// @ROUTE   GET /api/user/posts
 // @ACCESS  PRIVATE
 const getUsersPosts = asyncHandler(async (req, res) => {
   const pageSize = 10;

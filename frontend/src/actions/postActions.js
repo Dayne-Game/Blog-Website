@@ -55,7 +55,7 @@ export const userListPosts =
         },
       };
 
-      const { data } = await axios.get(`/api/posts/users?keyword=${keyword}&pageNumber=${pageNumber}`, config);
+      const { data } = await axios.get(`/api/posts/user?keyword=${keyword}&pageNumber=${pageNumber}`, config);
 
       dispatch({ type: USER_POST_LIST_SUCCESS, payload: data });
     } catch (error) {
@@ -70,7 +70,7 @@ export const userListPosts =
     }
   };
 
-export const postDetails = (id) => async (dispatch) => {
+export const listPostDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: POST_DETAILS_REQUEST });
 

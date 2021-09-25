@@ -5,7 +5,7 @@ import { getPostById, getUsersPosts, getPosts, deletePost, updatePost, createPos
 import { protect } from "../middleware/authMiddleware.js";
 
 router.route("/").get(getPosts).post(protect, createPost);
+router.get("/user", protect, getUsersPosts);
 router.route("/:id").get(getPostById).delete(protect, deletePost).put(protect, updatePost);
-router.get("/users", protect, getUsersPosts);
 
 export default router;
