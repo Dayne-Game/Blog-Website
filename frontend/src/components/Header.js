@@ -1,8 +1,7 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
-import { LinkContainer } from "react-router-bootstrap";
-import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -15,50 +14,36 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-        <Container>
-          <Navbar.Brand>Blog Website</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <LinkContainer to="/">
-                <Nav.Link>Home</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/posts">
-                <Nav.Link>Posts</Nav.Link>
-              </LinkContainer>
-            </Nav>
+    <Fragment>
+      <header>
+        <div className="container">
+          <h1>Blog Website</h1>
+        </div>
+      </header>
+      <nav>
+        <div className="container flex-between">
+          <div className="left-nav">
+            <Link to="/">Home</Link>
+            <Link to="/posts">Posts</Link>
+          </div>
+          <div className="right-nav">
             {userInfo ? (
               <Fragment>
-                <Nav className="ms-auto">
-                  <LinkContainer to="/dashboard">
-                    <Nav.Link>Dashboard</Nav.Link>
-                  </LinkContainer>
-                  <NavDropdown
-                    title={userInfo.name}
-                    id="collasible-nav-dropdown"
-                  >
-                    <NavDropdown.Item onClick={logoutHandler}>
-                      Logout
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </Nav>
+                <Link to="/dashboard">Dashboard</Link>
+                <Link to="#" onClick={logoutHandler}>
+                  Logout
+                </Link>
               </Fragment>
             ) : (
-              <Nav className="ms-auto">
-                <LinkContainer to="/register">
-                  <Nav.Link>Register</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to="/login">
-                  <Nav.Link>Login</Nav.Link>
-                </LinkContainer>
-              </Nav>
+              <Fragment>
+                <Link to="/register">Register</Link>
+                <Link to="/login">Login</Link>
+              </Fragment>
             )}
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </header>
+          </div>
+        </div>
+      </nav>
+    </Fragment>
   );
 };
 

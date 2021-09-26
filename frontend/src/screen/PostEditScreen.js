@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,7 +21,11 @@ const PostEditScreen = ({ match, history }) => {
   const { loading, error, post } = postDetails;
 
   const postUpdate = useSelector((state) => state.postUpdate);
-  const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = postUpdate;
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = postUpdate;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -58,42 +62,56 @@ const PostEditScreen = ({ match, history }) => {
   };
 
   return (
-    <>
-      <Link to="/dashboard" className="btn btn-light my-3">
-        Go Back
-      </Link>
-      <FormContainer>
-        <h1>Edit Post</h1>
-        {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
-        {loading ? (
-          <Loader />
-        ) : error ? (
-          <Message variant="danger">{error}</Message>
-        ) : (
-          <Form onSubmit={submitHandler}>
-            <Form.Group controlId="title">
-              <Form.Label>Title</Form.Label>
-              <Form.Control type="text" placeholder="Enter Title" value={title} onChange={(e) => setTitle(e.target.value)}></Form.Control>
-            </Form.Group>
+    <div className="container" style={{ paddingTop: "40px" }}>
+      {loadingUpdate && <Loader />}
+      {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
+        <Fragment>
+          <Link to="/dashboard" className="back-button">
+            Go Back
+          </Link>
+          <div className="post-form-container" style={{ marginTop: "30px" }}>
+            <div className="form-header">
+              <h1 style={{ marginBottom: "10px" }}>Create / Edit a Post</h1>
+            </div>
 
-            <Form.Group controlId="author">
-              <Form.Label>Price</Form.Label>
-              <Form.Control type="text" placeholder="Enter Author" value={author} onChange={(e) => setAuthor(e.target.value)}></Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId="body">
-              <Form.Label>Body</Form.Label>
-              <Form.Control as="textarea" rows={8} placeholder="Enter Body" value={body} onChange={(e) => setBody(e.target.value)}></Form.Control>
-            </Form.Group>
-
-            <Button type="submit" variant="primary">
-              Update
-            </Button>
-          </Form>
-        )}
-      </FormContainer>
-    </>
+            <form onSubmit={submitHandler}>
+              <p>Title of Post</p>
+              <input
+                type="text"
+                className="form-input"
+                placeholder="Sample Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <p>Author of Post (Doesn't have to be your name)</p>
+              <input
+                type="text"
+                className="form-input"
+                placeholder="John Doe"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+              />
+              <textarea
+                name="body"
+                className="form-input"
+                rows="25"
+                placeholder="Random Sample Text"
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+              ></textarea>
+              <button type="Submit" className="form-button">
+                Submit
+              </button>
+            </form>
+          </div>
+        </Fragment>
+      )}
+    </div>
   );
 };
 

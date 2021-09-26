@@ -1,14 +1,13 @@
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Table, Nav, Card, Button } from "react-bootstrap";
-import { userListPosts, createPost } from "../actions/postActions";
+import { userListPosts, createPost, deletePost } from "../actions/postActions";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { Link, Route } from "react-router-dom";
 import UserPostSearch from "../components/UserPostSearch";
 import Moment from "react-moment";
-import Paginate from "../components/Paginate";
 import { POST_CREATE_RESET } from "../constants/postConstants";
+import Paginate from "../components/Paginate";
 
 const DashboardScreen = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1;
@@ -20,10 +19,20 @@ const DashboardScreen = ({ history, match }) => {
   const { loading, error, posts, page, pages } = userPostList;
 
   const postCreate = useSelector((state) => state.postCreate);
-  const { loading: loadingCreate, error: errorCreate, success: successCreate, post: createdPost } = postCreate;
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    post: createdPost,
+  } = postCreate;
+
+  const postDelete = useSelector((state) => state.postDelete);
+  const { success: successDelete } = postDelete;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  console.log(posts);
 
   useEffect(() => {
     dispatch({ type: POST_CREATE_RESET });
@@ -37,7 +46,22 @@ const DashboardScreen = ({ history, match }) => {
     } else {
       dispatch(userListPosts(keyword, pageNumber));
     }
-  }, [dispatch, history, keyword, pageNumber, successCreate, createdPost, userInfo]);
+  }, [
+    dispatch,
+    history,
+    keyword,
+    pageNumber,
+    successCreate,
+    createdPost,
+    userInfo,
+    successDelete,
+  ]);
+
+  const deleteHandler = (id) => {
+    if (window.confirm("Are you sure? This cannot be undone.")) {
+      dispatch(deletePost(id));
+    }
+  };
 
   const createPostHandler = () => {
     dispatch(createPost());
@@ -52,63 +76,79 @@ const DashboardScreen = ({ history, match }) => {
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <Card>
-          <Fragment>
-            <Card.Header>
-              <div className="d-flex justifiy-content-between">
-                <Nav className="me-auto d-flex align-items-center">
-                  <Nav.Item style={{ marginRight: "10px", lineHeight: "50px" }}>
-                    <h3 style={{ paddingTop: "8px" }}>Your Posts</h3>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Button onClick={createPostHandler} className="btn btn-info">
-                      Create a Post
-                    </Button>
-                  </Nav.Item>
-                </Nav>
-                <Route render={({ history }) => <UserPostSearch history={history} />} />
-              </div>
-            </Card.Header>
-            <Card.Body>
-              {posts.length === 0 ? (
-                <p>There looks to be no posts! Either your Search couldn't find anthing, ot you need to start creating posts!</p>
-              ) : (
-                <Fragment>
-                  <p>Number of posts: {posts.length}</p>
-                  <Table striped bordered>
-                    <thead>
-                      <tr>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Date Created</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {posts.map((post) => (
-                        <tr key={post._id}>
-                          <td>
-                            <Link to={`/post/${post._id}`}>{post.title}</Link>
-                          </td>
-                          <td>{post.author}</td>
-                          <td>
-                            <Moment format="DD-MM-YYYY">{post.date}</Moment>
-                          </td>
-                          <td>
-                            <Link to={`/post/edit/${post._id}`} className="btn-sm btn btn-info" style={{ marginRight: "10px" }}>
-                              Edit
-                            </Link>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                  <Paginate pages={pages} page={page} isAdmin={true} />
-                </Fragment>
-              )}
-            </Card.Body>
-          </Fragment>
-        </Card>
+        <div className="container">
+          <div className="dashboard-greeting-container">
+            <h1>Welcome {userInfo.name}</h1>
+            <Link
+              to="#"
+              onClick={createPostHandler}
+              className="create-post-button"
+            >
+              Create Post
+            </Link>
+          </div>
+          <div className="dashboard-header-container">
+            <Route
+              render={({ history }) => <UserPostSearch history={history} />}
+            />
+          </div>
+          <p style={{ marginTop: "20px" }}>
+            After Searching, do a blank search to see all your posts again
+          </p>
+          {posts.length === 0 ? (
+            <p>
+              There looks to be no posts! Either your Search couldn't find
+              anything, or you need to start creating posts!
+            </p>
+          ) : (
+            <Fragment>
+              <table className="styled-table">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Date</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {posts.map((post) => (
+                    <tr key={post._id}>
+                      <td>
+                        <Link to={`/post/${post._id}`} className="title-button">
+                          {post.title}
+                        </Link>
+                      </td>
+                      <td>{post.author}</td>
+                      <td>
+                        <Moment format="DD-MM-YYYY">{post.date}</Moment>
+                      </td>
+                      <td>
+                        <Link
+                          to={`/post/edit/${post._id}`}
+                          className="edit-button"
+                        >
+                          EDIT
+                        </Link>
+                      </td>
+                      <td>
+                        <Link
+                          to="#"
+                          className="delete-button"
+                          onClick={() => deleteHandler(post._id)}
+                        >
+                          DELETE
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <Paginate pages={pages} page={page} isAdmin={true} />
+            </Fragment>
+          )}
+        </div>
       )}
     </Fragment>
   );

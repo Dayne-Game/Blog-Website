@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { Row, Col, Nav } from "react-bootstrap";
-import PostItem from "../components/PostItem";
+import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -19,31 +18,39 @@ const HomeScreen = () => {
 
   return (
     <Fragment>
-      <div className="header-panel">
-        <h1>My Blog Website</h1>
-      </div>
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <Row>
-          <Col sm="8" className="mt-3">
+        <div className="container">
+          <div style={{ width: "600px", float: "left" }}>
+            <h2 style={{ marginTop: "40px", marginBottom: "20px" }}>
+              How it works.
+            </h2>
             <p>
-              To start creating Posts you will need to Register! When you
-              register you will have access to your Dashboard where you can
-              create and edit your posts!
+              This websites allow users to register (sign up) and create posts
+              that can be read by other users.
+              <br />
+              <br />
+              This website is built using the MERN Stack. Uses MongoDB as the
+              document database, Express JS for REST API, React JS for the
+              Front-end and NodeJS.
             </p>
-          </Col>
-          <Col sm="4" className="mt-3">
-            <h3>Latest Posts</h3>
-            <Nav vertical>
-              {posts.slice(0, 5).map((p) => (
-                <PostItem post={p} />
-              ))}
-            </Nav>
-          </Col>
-        </Row>
+          </div>
+          <div style={{ width: "350px", float: "right" }}>
+            <h2 style={{ marginTop: "40px", marginBottom: "20px" }}>
+              Top 5 Posts
+            </h2>
+            {posts.slice(0, 5).map((post) => (
+              <Link key={post._id} to={`/post/${post._id}`}>
+                <div className="post-item">
+                  <p>{post.title}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       )}
     </Fragment>
   );

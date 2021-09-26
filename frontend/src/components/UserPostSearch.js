@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Col, Form } from "react-bootstrap";
 
 const UserPostSearch = ({ history }) => {
   const [keyword, setKeyword] = useState("");
@@ -14,17 +13,18 @@ const UserPostSearch = ({ history }) => {
   };
 
   return (
-    <Col md={3} sm={8}>
-      <Form className="search" onSubmit={submitHandler}>
+    <div className="search-container">
+      <form onSubmit={submitHandler}>
         <input
           type="text"
-          className="form-control"
+          className="
+        search-input"
           onChange={(e) => setKeyword(e.target.value)}
           placeholder="Search Your Posts..."
         />
-        <button className="btn btn-info">Search</button>{" "}
-      </Form>
-    </Col>
+        <button className="submit-button">Search</button>{" "}
+      </form>
+    </div>
   );
 };
 

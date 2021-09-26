@@ -15,7 +15,11 @@ function App() {
         <Container>
           <Route path="/" component={HomeScreen} exact />
           <Route path="/login" component={LoginScreen} />
-          <Route path="/user/post/search/:keyword" component={DashboardScreen} exact />
+          <Route
+            path="/user/post/search/:keyword"
+            component={DashboardScreen}
+            exact
+          />
           <Route path="/dashboard" component={DashboardScreen} exact />
           <Route path="/dashboard/:pageNumber" component={DashboardScreen} />
           <Route path="/register" component={RegisterScreen} />

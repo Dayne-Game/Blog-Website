@@ -29,7 +29,7 @@ const getPosts = asyncHandler(async (req, res) => {
 // @ROUTE   GET /api/user/posts
 // @ACCESS  PRIVATE
 const getUsersPosts = asyncHandler(async (req, res) => {
-  const pageSize = 10;
+  const pageSize = 5;
   const page = Number(req.query.pageNumber) || 1;
 
   const keyword = req.query.keyword
@@ -41,7 +41,10 @@ const getUsersPosts = asyncHandler(async (req, res) => {
       }
     : {};
 
-  const count = await Post.countDocuments({ ...keyword });
+  const count = await Post.countDocuments({
+    $or: [{ user: req.user.id }],
+    ...keyword,
+  });
   const posts = await Post.find({ $or: [{ user: req.user.id }], ...keyword })
     .limit(pageSize)
     .skip(pageSize * (page - 1));
@@ -114,4 +117,11 @@ const updatePost = asyncHandler(async (req, res) => {
   }
 });
 
-export { getPostById, getPosts, getUsersPosts, createPost, updatePost, deletePost };
+export {
+  getPostById,
+  getPosts,
+  getUsersPosts,
+  createPost,
+  updatePost,
+  deletePost,
+};
