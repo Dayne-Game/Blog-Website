@@ -5,7 +5,7 @@ import Post from "../models/postModel.js";
 // @ROUTE   GET /api/posts
 // @ACCESS  PUBLIC
 const getPosts = asyncHandler(async (req, res) => {
-  const pageSize = 10;
+  const pageSize = 7;
   const page = Number(req.query.pageNumber) || 1;
 
   const keyword = req.query.keyword
@@ -117,11 +117,4 @@ const updatePost = asyncHandler(async (req, res) => {
   }
 });
 
-export {
-  getPostById,
-  getPosts,
-  getUsersPosts,
-  createPost,
-  updatePost,
-  deletePost,
-};
+export { getPostById, getPosts, getUsersPosts, createPost, updatePost, deletePost };

@@ -1,10 +1,8 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import FormContainer from "../components/FormContainer";
 import { listPostDetails, updatePost } from "../actions/postActions";
 import { POST_UPDATE_RESET } from "../constants/postConstants";
 
@@ -21,11 +19,7 @@ const PostEditScreen = ({ match, history }) => {
   const { loading, error, post } = postDetails;
 
   const postUpdate = useSelector((state) => state.postUpdate);
-  const {
-    loading: loadingUpdate,
-    error: errorUpdate,
-    success: successUpdate,
-  } = postUpdate;
+  const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = postUpdate;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -81,29 +75,10 @@ const PostEditScreen = ({ match, history }) => {
 
             <form onSubmit={submitHandler}>
               <p>Title of Post</p>
-              <input
-                type="text"
-                className="form-input"
-                placeholder="Sample Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
+              <input type="text" className="form-input" placeholder="Sample Title" value={title} onChange={(e) => setTitle(e.target.value)} />
               <p>Author of Post (Doesn't have to be your name)</p>
-              <input
-                type="text"
-                className="form-input"
-                placeholder="John Doe"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
-              />
-              <textarea
-                name="body"
-                className="form-input"
-                rows="25"
-                placeholder="Random Sample Text"
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-              ></textarea>
+              <input type="text" className="form-input" placeholder="John Doe" value={author} onChange={(e) => setAuthor(e.target.value)} />
+              <textarea name="body" className="form-input" rows="25" placeholder="Random Sample Text" value={body} onChange={(e) => setBody(e.target.value)}></textarea>
               <button type="Submit" className="form-button">
                 Submit
               </button>

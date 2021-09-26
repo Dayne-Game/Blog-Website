@@ -19,12 +19,7 @@ const DashboardScreen = ({ history, match }) => {
   const { loading, error, posts, page, pages } = userPostList;
 
   const postCreate = useSelector((state) => state.postCreate);
-  const {
-    loading: loadingCreate,
-    error: errorCreate,
-    success: successCreate,
-    post: createdPost,
-  } = postCreate;
+  const { loading: loadingCreate, error: errorCreate, success: successCreate, post: createdPost } = postCreate;
 
   const postDelete = useSelector((state) => state.postDelete);
   const { success: successDelete } = postDelete;
@@ -46,16 +41,7 @@ const DashboardScreen = ({ history, match }) => {
     } else {
       dispatch(userListPosts(keyword, pageNumber));
     }
-  }, [
-    dispatch,
-    history,
-    keyword,
-    pageNumber,
-    successCreate,
-    createdPost,
-    userInfo,
-    successDelete,
-  ]);
+  }, [dispatch, history, keyword, pageNumber, successCreate, createdPost, userInfo, successDelete]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure? This cannot be undone.")) {
@@ -79,27 +65,16 @@ const DashboardScreen = ({ history, match }) => {
         <div className="container">
           <div className="dashboard-greeting-container">
             <h1>Welcome {userInfo.name}</h1>
-            <Link
-              to="#"
-              onClick={createPostHandler}
-              className="create-post-button"
-            >
+            <Link to="#" onClick={createPostHandler} className="create-post-button">
               Create Post
             </Link>
           </div>
           <div className="dashboard-header-container">
-            <Route
-              render={({ history }) => <UserPostSearch history={history} />}
-            />
+            <Route render={({ history }) => <UserPostSearch history={history} />} />
           </div>
-          <p style={{ marginTop: "20px" }}>
-            After Searching, do a blank search to see all your posts again
-          </p>
+          <p style={{ marginTop: "20px" }}>After Searching, do a blank search to see all your posts again</p>
           {posts.length === 0 ? (
-            <p>
-              There looks to be no posts! Either your Search couldn't find
-              anything, or you need to start creating posts!
-            </p>
+            <p>There looks to be no posts! Either your Search couldn't find anything, or you need to start creating posts!</p>
           ) : (
             <Fragment>
               <table className="styled-table">
@@ -125,19 +100,12 @@ const DashboardScreen = ({ history, match }) => {
                         <Moment format="DD-MM-YYYY">{post.date}</Moment>
                       </td>
                       <td>
-                        <Link
-                          to={`/post/edit/${post._id}`}
-                          className="edit-button"
-                        >
+                        <Link to={`/post/edit/${post._id}`} className="edit-button">
                           EDIT
                         </Link>
                       </td>
                       <td>
-                        <Link
-                          to="#"
-                          className="delete-button"
-                          onClick={() => deleteHandler(post._id)}
-                        >
+                        <Link to="#" className="delete-button" onClick={() => deleteHandler(post._id)}>
                           DELETE
                         </Link>
                       </td>
