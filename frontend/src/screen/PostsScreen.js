@@ -6,7 +6,7 @@ import Loader from "../components/Loader";
 import { Link, Route } from "react-router-dom";
 import PostSearch from "../components/PostSearch";
 import Moment from "react-moment";
-import Paginate from "../components/Paginate";
+import PostPaginate from "../components/PostPaginate";
 
 const PostsScreen = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1;
@@ -65,7 +65,7 @@ const PostsScreen = ({ history, match }) => {
                   ))}
                 </tbody>
               </table>
-              <Paginate pages={pages} page={page} isAdmin={true} />
+              <PostPaginate pages={pages} page={page} isAdmin={true} />
             </Fragment>
           )}
         </div>
