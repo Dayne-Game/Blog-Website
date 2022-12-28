@@ -1,6 +1,6 @@
 {
   "name": "website-blog",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Users can create blog posts and can be read by other users",
   "main": "server.js",
   "type": "module",

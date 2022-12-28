@@ -7,7 +7,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
 
 import postRoutes from "./routes/postRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
+import userRoutes from "./routes/userRoute.js";
 
 const __dirname = path.resolve();
 
