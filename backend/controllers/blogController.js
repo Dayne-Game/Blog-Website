@@ -66,6 +66,10 @@ const getPostById = asyncHandler(async (req, res) => {
   }
 });
 
+const getUserPost = asyncHandler(async (req, res) => {
+  console.log(req.user._id);
+})
+
 // @DESC    DELETE A POST
 // @ROUTE   DELETE /api/posts/:id
 // @ACCESS  PRIVATE
@@ -117,4 +121,4 @@ const updatePost = asyncHandler(async (req, res) => {
   }
 });
 
-export { getPostById, getPosts, getUsersPosts, createPost, updatePost, deletePost };
+export { getPostById, getPosts, getUsersPosts, createPost, updatePost, deletePost, getUserPost };

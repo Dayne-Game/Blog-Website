@@ -12,7 +12,6 @@ const HomeScreen = () => {
             <br />
             This website is built using the MERN Stack. Uses MongoDB as the document database, Express JS for REST API, React JS for the Front-end and NodeJS.
             <br/>
-            <p>Hire me please!</p>
           </p>
         </div>
       </div>
