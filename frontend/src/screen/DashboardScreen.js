@@ -27,8 +27,6 @@ const DashboardScreen = ({ history, match }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  console.log(posts);
-
   useEffect(() => {
     dispatch({ type: POST_CREATE_RESET });
 

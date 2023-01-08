@@ -12,6 +12,8 @@ const HomeScreen = () => {
             <br />
             This website is built using the MERN Stack. Uses MongoDB as the document database, Express JS for REST API, React JS for the Front-end and NodeJS.
             <br/>
+			<br />
+			<a href="https://www.google.com/maps?q=-37.55890800,175.91638600">Click Here Dayne!</a>
           </p>
         </div>
       </div>
